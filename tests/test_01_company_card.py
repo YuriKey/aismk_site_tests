@@ -1,7 +1,6 @@
 import pytest
 from pages.company_card_page import CompanyCardPage
 from data.locators.company_card_locators import CardPageLocators as loc
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from data.urls import Urls
 
 urls = Urls()
@@ -26,11 +25,7 @@ def test_check_following(browser, locator):
     page = CompanyCardPage(browser)
     page.open(urls.MAIN_PAGE)
 
-    try:
-        if page.accept_cookies_button_is_displayed:
-            page.click_element(loc.ACCEPT_COOKIE_BUTTON)
-    except (NoSuchElementException, TimeoutException):
-        pass
+    page.accept_cookies()
 
     page.click_element(locator)
     actual_text = page.find(loc.CARD_TEXT_AREA).text
