@@ -1,8 +1,7 @@
-import time
-
 import pytest
 from pages.company_card_page import CompanyCardPage
 from data.locators.company_card_locators import CardPageLocators as loc
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from data.urls import Urls
 
 urls = Urls()
@@ -26,4 +25,22 @@ def test_company_card_button_exists(browser, locator, expected_text):
 def test_check_following(browser, locator):
     page = CompanyCardPage(browser)
     page.open(urls.MAIN_PAGE)
-    page.click_element(locator)  # resolve problem with accept cookies button "if-else" and needless click-function
+
+    try:
+        if page.accept_cookies_button_is_displayed:
+            page.click_element(loc.ACCEPT_COOKIE_BUTTON)
+    except (NoSuchElementException, TimeoutException):
+        pass
+
+    page.click_element(locator)
+    actual_text = page.find(loc.CARD_TEXT_AREA).text
+    assert browser.current_url == urls.COMPANY_CARD_PAGE, 'Incorrect url'
+    assert browser.title == "Карточка предприятия — АИСМК", 'Incorrect title'
+    assert actual_text == ("ООО «Алинги»\nЮридический адрес: 432027, Россия, Ульяновская область, г. Ульяновск, "
+                           "ул. Радищева д. 143 корп. 4\nОГРН: 1157325005639\nИНН/КПП: "
+                           "7325139255/732501001\nГенеральный директор: Дирксен Алексей Вольдемарович\nДействует на "
+                           "основании Устава\nБанковские реквизиты:\nр/с: 40702810129280000903 в Филиал "
+                           "«Нижегородский» АО «АЛЬФА-БАНК»\nБИК 042202824, к/с 30101810200000000824"), ('Incorrect '
+                                                                                                         'company info')
+
+

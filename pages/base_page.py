@@ -1,7 +1,6 @@
 """
 Хранит свойства и методы, присущие всем страницам.
 """
-from data.urls import Urls
 
 
 class BasePage:

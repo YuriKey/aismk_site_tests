@@ -17,10 +17,10 @@ class CompanyCardPage(BasePage):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
         return self.company_card_button(locator).is_displayed()
 
-    def company_card_footer(self, locator):
-        """Метод, который находит кнопку и возвращает элемент."""
+    def accept_cookies_button(self, locator):
+        """Метод, который находит кнопку принятия кукис и возвращает элемент."""
         return self.find(locator)
 
-    def company_card_footer_is_displayed(self, locator):
+    def accept_cookies_button_is_displayed(self, locator):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
-        return self.company_card_button(locator).is_displayed()
+        return self.accept_cookies_button(locator).is_displayed()
