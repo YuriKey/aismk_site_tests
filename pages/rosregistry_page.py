@@ -19,7 +19,7 @@ class RegistryPage(BasePage):
 
     def click_registry_button(self):
         """Метод, который кликает по кнопке."""
-        self.find(loc.REGISTRY_BUTTON).click()
+        self.registry_button().click()
 
     def assertion_text_func(self, locator, expected):
         """Метод, который сравнивает ожидаемый и фактический текст на странице."""
