@@ -13,14 +13,6 @@ class MainPage(BasePage):
         """Метод, который открывает главную страницу."""
         self.browser.get(url.MAIN_PAGE)
 
-    def registry_button(self):
-        """Метод, который находит кнопку registry_button и возвращает элемент кнопки."""
-        return self.find(loc.REGISTRY_BUTTON)
-
-    def registry_button_is_displayed(self):
-        """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
-        return self.registry_button().is_displayed()
-
     def offer_button(self):
         """Метод, который находит кнопку на форму обратной связи и возвращает элемент кнопки."""
         return self.find(loc.OFFER_BUTTON)

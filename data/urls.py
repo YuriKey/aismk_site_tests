@@ -7,7 +7,8 @@ class Urls:
 
     COMPANY_CARD_PAGE = "https://aismk.ru/imprint/"
 
-    RR_COMPANY_PAGE = "https://reestr.digital.gov.ru/reestr/1284851/"
+    RR_SOFTWARE_PAGE = "https://reestr.digital.gov.ru/reestr/1284851/"
+    RR_COMPANY_PAGE = "https://reestr.digital.gov.ru/promo/owner/1284851/1119621/"
 
     MODULE_UR = "https://aismk.ru/ur/"
     MODULE_MP = "https://aismk.ru/mp/"

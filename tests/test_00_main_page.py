@@ -17,14 +17,6 @@ def test_site_open(browser, url):
     assert page.browser.title == "Главная — АИСМК - Путь к качеству", 'Wrong title'
 
 
-def test_registry_button(browser):
-    """Проверка наличия кнопки перехода на запись в росреестре"""
-    page = MainPage(browser)
-    page.open_main()
-    assert page.registry_button_is_displayed(), 'Registry button not found.'
-    assert page.registry_button().text == "В РЕЕСТРЕ РОССИЙСКОГО ПО", 'text not found.'
-
-
 def test_offer_button(browser):
     """Проверка наличия кнопки перехода на форму обратной связи"""
     page = MainPage(browser)
