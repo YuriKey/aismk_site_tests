@@ -11,7 +11,7 @@ class RegistryPage(BasePage):
 
     def registry_button(self):
         """Метод, который находит кнопку registry_button и возвращает элемент кнопки."""
-        return self.find(loc.REGISTRY_BUTTON)
+        return self.find_item(loc.REGISTRY_BUTTON)
 
     def registry_button_is_displayed(self):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
@@ -23,5 +23,5 @@ class RegistryPage(BasePage):
 
     def assertion_text_func(self, locator, expected):
         """Метод, который сравнивает ожидаемый и фактический текст на странице."""
-        actual = self.find(locator).text
+        actual = self.find_item(locator).text
         assert expected == actual, f"Text '{actual}' is not correct."

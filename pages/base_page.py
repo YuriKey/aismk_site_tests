@@ -10,17 +10,14 @@ class BasePage:
     def open(self, url):  # Метод, который открывает страницу.
         self.browser.get(url)
 
-    def find(self, args):  # Давай любые аргументы.
-        return self.browser.find_element(*args)  # А я найду элемент.
+    def find_item(self, args):  # Принимает любые аргументы
+        return self.browser.find_element(*args)  # И ищет элемент.
 
     def click_element(self, args):
-        return self.find(args).click()  # А я кликну на элемент.
+        return self.find_item(args).click()
 
     def fill_field(self, args, text):
-        return self.find(args).send_keys(text)  # А я запишу туда текст.
+        return self.find_item(args).send_keys(text)
 
-    # def element_is_displayed(self, args):
-    #     return self.find(args).is_displayed()
-
-
-
+    def element_is_displayed(self, args):
+        return self.find_item(args).is_displayed()

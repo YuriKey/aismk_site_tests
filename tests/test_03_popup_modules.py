@@ -1,7 +1,6 @@
 import time
 import pytest
-
-from pages.modules_page import PopupModulesPage
+from pages.modules_page import ModulesPage
 from data.locators.popup_modules_locators import PopupModulesLocators as loc
 from data.urls import Urls
 
@@ -10,29 +9,29 @@ urls = Urls()
 
 def test_popup_button(browser):
     """Проверка наличия кнопки открытия попапа"""
-    page = PopupModulesPage(browser)
+    page = ModulesPage(browser)
     page.open(urls.MAIN_PAGE)
-    assert page.popup_button().is_displayed(), 'Registry button not found.'
-    assert page.popup_button().text == "МОДУЛИ", 'Text is not correct.'
+    assert page.element_is_displayed(loc.POPUP_BUTTON), 'Registry button not found.'
+    assert page.find_item(loc.POPUP_BUTTON).text == "МОДУЛИ", 'Text is not correct.'
 
 
 def test_popup_open(browser):
     """Проверка открытия попапа"""
-    page = PopupModulesPage(browser)
+    page = ModulesPage(browser)
     page.open(urls.MAIN_PAGE)
-    page.click_popup_button()
-    assert page.find(loc.POPUP_AREA).is_displayed(), 'Popup is not opened.'
-    assert page.find(loc.CLOSE_POPUP_BUTTON).is_displayed(), 'Close button is not found.'
+    page.click_element(loc.POPUP_BUTTON)
+    assert page.element_is_displayed(loc.POPUP_AREA), 'Popup is not opened.'
+    assert page.element_is_displayed(loc.CLOSE_POPUP_BUTTON), 'Close button is not found.'
 
 
 def test_popup_close(browser):
     """Проверка закрытия попапа"""
-    page = PopupModulesPage(browser)
+    page = ModulesPage(browser)
     page.open(urls.MAIN_PAGE)
-    page.click_popup_button()
-    page.find(loc.CLOSE_POPUP_BUTTON).click()
-    # time.sleep(2)
-    assert not page.find(loc.CLOSE_POPUP_BUTTON).is_displayed(), 'Popup is not closed.'
+    page.click_element(loc.POPUP_BUTTON)
+    page.click_element(loc.CLOSE_POPUP_BUTTON)
+    time.sleep(1)
+    assert not page.element_is_displayed(loc.CLOSE_POPUP_BUTTON), 'Popup is not closed.'
 
 
 @pytest.mark.parametrize('module_locator, url, title, header_text', [
@@ -47,13 +46,20 @@ def test_popup_close(browser):
     (loc.POPUP_AKP, urls.MODULE_AKP, "Анализ корневых причин — АИСМК", "Анализ корневых причин")
 ])
 def test_popup_module_following(browser, module_locator, url, title, header_text):
-    """Проверка перехода на страницу модуля УР из попапа"""
-    page = PopupModulesPage(browser)
+    """Проверка перехода на страницу модуля из попапа с помощью soft assert."""
+    page = ModulesPage(browser)
     page.open(urls.MAIN_PAGE)
-    page.click_popup_button()
-    assert page.find(module_locator).is_displayed(), 'Module button is not found.'
+    page.click_element(loc.POPUP_BUTTON)
 
-    page.find(module_locator).click()
-    assert browser.current_url == url, 'Wrong url.'
-    assert browser.title == title, 'Wrong page title.'
-    assert page.find(loc.HEADER_LOCATOR).text == header_text, 'Wrong page header.'
+    errors = []
+
+    page.wait_for_visibility(module_locator, errors, f'Module button "{module_locator}" is not found')
+
+    page.click_element(module_locator)
+
+    page.check_current_url(url, errors)
+    page.check_page_title(title, errors)
+    page.check_header_text(loc.HEADER_TEXT, header_text, errors)
+    page.check_offer_button(loc.OFFER_BUTTON, "Получить предложение", errors)
+
+    assert not errors, "\n".join(errors)

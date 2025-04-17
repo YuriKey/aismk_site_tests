@@ -28,7 +28,7 @@ def test_check_following(browser, locator):
     page.accept_cookies()
 
     page.click_element(locator)
-    actual_text = page.find(loc.CARD_TEXT_AREA).text
+    actual_text = page.find_item(loc.CARD_TEXT_AREA).text
     assert browser.current_url == urls.COMPANY_CARD_PAGE, 'Incorrect url'
     assert browser.title == "Карточка предприятия — АИСМК", 'Incorrect title'
     assert actual_text == ("ООО «Алинги»\nЮридический адрес: 432027, Россия, Ульяновская область, г. Ульяновск, "

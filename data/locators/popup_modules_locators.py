@@ -17,4 +17,6 @@ class PopupModulesLocators:
 
     POPUP_AREA = (By.XPATH, '//*[@data-elementor-type="popup"]')
 
-    HEADER_LOCATOR = (By.XPATH, '//h1[@class="elementor-heading-title elementor-size-default"]')
+    HEADER_TEXT = (By.XPATH, '//h1[@class="elementor-heading-title elementor-size-default"]')
+
+    OFFER_BUTTON = (By.XPATH, '//*[@class="elementor-button-text"]')

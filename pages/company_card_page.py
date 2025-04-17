@@ -12,7 +12,7 @@ class CompanyCardPage(BasePage):
 
     def company_card_button(self, locator):
         """Метод, который находит кнопку и возвращает элемент."""
-        return self.find(locator)
+        return self.find_item(locator)
 
     def company_card_button_is_displayed(self, locator):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
@@ -21,7 +21,7 @@ class CompanyCardPage(BasePage):
     def accept_cookies(self, locator=loc.ACCEPT_COOKIE_BUTTON):
         """Метод, который принимает куки, если кнопка отображается."""
         try:
-            if self.find(locator).is_displayed():
+            if self.find_item(locator).is_displayed():
                 self.click_element(locator)
         except (NoSuchElementException, TimeoutException):
             pass

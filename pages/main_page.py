@@ -15,7 +15,7 @@ class MainPage(BasePage):
 
     def offer_button(self):
         """Метод, который находит кнопку на форму обратной связи и возвращает элемент кнопки."""
-        return self.find(loc.OFFER_BUTTON)
+        return self.find_item(loc.OFFER_BUTTON)
 
     def offer_button_is_displayed(self):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
@@ -23,7 +23,7 @@ class MainPage(BasePage):
 
     def phone_header(self):
         """Метод, который находит телефон и возвращает элемент."""
-        return self.find(loc.PHONE_HEADER)
+        return self.find_item(loc.PHONE_HEADER)
 
     def phone_header_is_displayed(self):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
@@ -31,7 +31,7 @@ class MainPage(BasePage):
 
     def contacts_footer(self):
         """Метод, который находит контакты и возвращает элемент."""
-        return self.find(loc.CONTACTS_FOOTER)
+        return self.find_item(loc.CONTACTS_FOOTER)
 
     def contacts_footer_is_displayed(self):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
@@ -39,7 +39,7 @@ class MainPage(BasePage):
 
     def email_footer(self):
         """Метод, который находит email и возвращает элемент."""
-        return self.find(loc.EMAIL_FOOTER)
+        return self.find_item(loc.EMAIL_FOOTER)
 
     def email_footer_is_displayed(self):
         """Метод, который проверяет, отображается ли кнопка. Возвращает True или False."""
