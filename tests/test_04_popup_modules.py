@@ -12,7 +12,7 @@ def test_popup_button(browser):
     page = ModulesPage(browser)
     page.open(urls.MAIN_PAGE)
     assert page.element_is_displayed(loc.POPUP_BUTTON), 'Registry button not found.'
-    assert page.find_item(loc.POPUP_BUTTON).text == "МОДУЛИ", 'Text is not correct.'
+    assert page.find_element(loc.POPUP_BUTTON).text == "МОДУЛИ", 'Text is not correct.'
 
 
 def test_popup_open(browser):

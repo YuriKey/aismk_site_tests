@@ -15,7 +15,7 @@ class ModulesPage(BasePage):
 
     def assertion_text_func(self, locator, expected):
         """Метод, который сравнивает ожидаемый и фактический текст на странице."""
-        actual = self.find_item(locator).text
+        actual = self.find_element(locator).text
         assert expected == actual, f"Text '{actual}' is not correct."
 
     def wait_for_visibility(self, locator, errors, error_message):
@@ -34,7 +34,7 @@ class ModulesPage(BasePage):
             errors.append(f'Wrong page title. Expected {expected_title}, but got {self.browser.title}')
 
     def check_header_text(self, locator, expected_text, errors):
-        element = self.find_item(locator)
+        element = self.find_element(locator)
         if element.text != expected_text:
             errors.append(f'Wrong page header. Expected "{expected_text}", but got "{element.text}"')
 
