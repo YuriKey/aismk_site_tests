@@ -12,6 +12,7 @@ class PopupModulesLocators:
     POPUP_VK = (By.XPATH, '//*[@href="/vk/"]')
     POPUP_AU = (By.XPATH, '//*[@href="/au/"]')
     POPUP_AKP = (By.XPATH, '//*[@href="/akp/"]')
+    POPUP_US = (By.XPATH, '//*[@href="/us/"]')
 
     CLOSE_POPUP_BUTTON = (By.XPATH, '//*[@class="e-font-icon-svg e-eicon-close eicon-close"]')
 

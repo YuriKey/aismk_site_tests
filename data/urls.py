@@ -19,4 +19,5 @@ class Urls:
     MODULE_SK = "https://aismk.ru/sk/"
     MODULE_VK = "https://aismk.ru/vk/"
     MODULE_AKP = "https://aismk.ru/akp/"
+    MODULE_US = "https://aismk.ru/us/"
 
