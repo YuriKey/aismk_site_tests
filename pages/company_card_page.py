@@ -1,5 +1,6 @@
 import allure
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.remote.webelement import WebElement
 
 from data.locators.company_card_locators import CardPageLocators as loc
 from data.urls import Urls
@@ -22,7 +23,7 @@ class CompanyCardPage(BasePage):
         'title': 'Карточка предприятия — АИСМК'
     }
 
-    def company_card_button(self, locator) -> object:
+    def company_card_button(self, locator) -> WebElement:
         with allure.step("Поиск кнопки на странице"):
             try:
                 return self.find_element(locator)

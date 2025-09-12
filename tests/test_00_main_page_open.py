@@ -21,5 +21,7 @@ def test_site_open(pages, url):
     exp = page.EXPECTED_TEXTS
 
     with allure.step('1. Проверка открытия страницы'):
-        assert page.get_current_url() == exp['url'], 'Site isn`t open'
-        assert page.get_title() == exp['title'], 'Wrong title'
+        assert page.get_current_url() == exp['url'], \
+            'Страница не открылась'
+        assert page.get_title() == exp['title'], \
+            'Не верный title страницы'

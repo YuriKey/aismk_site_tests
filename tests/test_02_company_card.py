@@ -22,7 +22,8 @@ def test_check_company_card_page(pages, locator):
     exp = c_page.EXPECTED_TEXTS
 
     with allure.step('1. Проверка отображения ссылки на карточку предприятия'):
-        assert c_page.company_card_button_is_displayed(locator), 'Company card button not found.'
+        assert c_page.company_card_button_is_displayed(locator), \
+            'Карточка предприятия не отображается'
 
         c_page.accept_cookies()
 
@@ -30,6 +31,9 @@ def test_check_company_card_page(pages, locator):
         page.click_element(locator)
 
     with allure.step('3. Проверка корректности отображения информации о компании'):
-        assert page.get_current_url() == exp['url'], 'Incorrect url'
-        assert page.get_title() == exp['title'], 'Incorrect title'
-        assert page.get_text(c_page.card_text_area()) == exp['company_info'], 'Incorrect company info'
+        assert page.get_current_url() == exp['url'], \
+            'Не верный url страницы карточки предприятия'
+        assert page.get_title() == exp['title'], \
+            'не верный title страницы карточки предприятия'
+        assert page.get_text(c_page.card_text_area()) == exp['company_info'], \
+            'Не верный текст информации о компании'

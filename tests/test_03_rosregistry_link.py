@@ -1,36 +1,38 @@
-from pages.rosregistry_page import RegistryPage
+import allure
+
 from data.locators.rosregistry_locators import RegistryPageLocators as loc
 from data.urls import Urls
 
 urls = Urls()
 
 
-def test_rosregistry_button(browser):
-    """Проверка наличия кнопки перехода на запись в росреестре"""
-    page = RegistryPage(browser)
-    page.open(urls.MAIN_PAGE)
-    assert page.registry_button_is_displayed(), 'Registry button not found.'
-    assert page.registry_button().text == "В РЕЕСТРЕ РОССИЙСКОГО ПО", 'Text is not correct.'
-
-
-def test_check_following(browser):
-    """Проверка перехода на запись в Росреестре по клику на кнопку.
-    Проверка данных страницы росреестра.
-    """
-    page = RegistryPage(browser)
-    page.open(urls.MAIN_PAGE)
-
-    page.click_registry_button()
+@allure.epic('Company site')
+@allure.feature('Rosregistry page')
+@allure.story('03. Rosregistry following check')
+@allure.severity(allure.severity_level.NORMAL)
+def test_rosregistry_link(pages):
+    page = pages.registry
+    page.open_main()
+    exp = page.EXPECTED_TEXTS
 
     test_data = [
-        (loc.OWNER_TITLE, 'Общество с ограниченной ответственностью "Алинги"'),
-        (loc.OWNER_SHORT_TITLE, 'ООО "Алинги"'),
-        (loc.HEADER_TITLE, "АИСМК"),
-        (loc.SOFT_FULL_TITLE, "Автоматизированная Информационная Система Менеджмента Качества")
+        (loc.OWNER_TITLE, exp['owner_title']),
+        (loc.OWNER_SHORT_TITLE, exp['owner_short_title']),
+        (loc.HEADER_TITLE, exp['title']),
+        (loc.SOFT_FULL_TITLE, exp['soft_full_title']),
     ]
 
-    assert browser.current_url == urls.RR_SOFTWARE_PAGE, 'Incorrect URL'
-    assert browser.title == "АИСМК"
+    with allure.step('1. Проверка наличия кнопки перехода на запись в Росреестре'):
+        assert page.registry_button_is_displayed(), \
+            'Кнопка перехода на запись в росреестре не отображается'
 
-    for locator, expected in test_data:
-        page.assertion_text_func(locator, expected)
+    with allure.step('2. Нажать на кнопку перехода на запись в Росреестре'):
+        page.click_registry_button()
+        assert page.get_current_url() == exp['url'], \
+            'Не верный url страницы'
+        assert page.get_title() == exp['title'], \
+            'Не верный title страницы'
+
+    with allure.step('3. Проверка данных страницы Росреестра'):
+        for locator, expected in test_data:
+            page.assertion_text_func(locator, expected)

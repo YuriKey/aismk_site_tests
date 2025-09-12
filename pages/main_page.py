@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver.remote.webelement import WebElement
 
 from data.locators.main_page_locators import MainPageLocators as loc
 from data.urls import Urls
@@ -21,24 +22,27 @@ class MainPage(BasePage):
     }
 
     def open_main(self) -> None:
-        """Метод открывает главную страницу."""
-        self.browser.get(url.MAIN_PAGE)
+        with allure.step('Открытие главной страницы'):
+            try:
+                self.browser.get(url.MAIN_PAGE)
+            except Exception as e:
+                raise Exception(f'Не удалось открыть главную страницу: {e}')
 
-    def offer_button(self) -> object:
-        with allure.step('Нахождение кнопки'):
+    def offer_button(self) -> WebElement:
+        with allure.step('Поиск кнопки предложения'):
             try:
                 return self.find_element(loc.OFFER_BUTTON)
             except Exception as e:
-                raise Exception(f'Не удалось найти кнопку на странице: {e}')
+                raise Exception(f'Не удалось найти кнопку предложения на странице: {e}')
 
     def offer_button_is_displayed(self) -> bool:
         with allure.step('Проверка отображения кнопки предложения'):
             try:
                 return self.offer_button().is_displayed()
             except Exception as e:
-                raise Exception(f'Кнопка на странице отсутствует: {e}')
+                raise Exception(f'Кнопка на странице не отображается: {e}')
 
-    def phone_header(self) -> object:
+    def phone_header(self) -> WebElement:
         with allure.step('Поиск телефона в хедере'):
             try:
                 return self.find_element(loc.PHONE_HEADER)
@@ -52,7 +56,7 @@ class MainPage(BasePage):
             except Exception as e:
                 raise Exception(f'Телефон в хедере не отображается: {e}')
 
-    def contacts_footer(self) -> object:
+    def contacts_footer(self) -> WebElement:
         with allure.step('Поиск контактов в футере'):
             try:
                 return self.find_element(loc.CONTACTS_FOOTER)
@@ -66,7 +70,7 @@ class MainPage(BasePage):
             except Exception as e:
                 raise Exception(f'Контакты в футере не отображаются: {e}')
 
-    def email_footer(self) -> object:
+    def email_footer(self) -> WebElement:
         with allure.step('Поиск email в футере'):
             try:
                 return self.find_element(loc.EMAIL_FOOTER)

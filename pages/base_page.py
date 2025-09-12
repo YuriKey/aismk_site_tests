@@ -61,7 +61,7 @@ class BasePage:
         try:
             element = self.wait.until(EC.visibility_of_element_located(locator))
             return element.is_displayed()
-        except:
+        except Exception as e:
             return False
 
     def get_current_url(self) -> str:
@@ -92,7 +92,7 @@ class BasePage:
             except Exception as e:
                 raise Exception(f'Ошибка при скроллинге до элемента: {str(e)}')
 
-    def switch_to_alert(self):
+    def switch_to_alert(self) -> object:
         with allure.step('Переключение на алерт'):
             try:
                 WebDriverWait(self.browser, 5).until(EC.alert_is_present())
@@ -101,7 +101,7 @@ class BasePage:
             except Exception as e:
                 raise Exception(f'Не удалось переключиться на алерт: {e}')
 
-    def accept_alert(self):
+    def accept_alert(self) -> None:
         with allure.step('Подтверждение алерта'):
             try:
                 self.wait.until(EC.alert_is_present())
@@ -110,8 +110,16 @@ class BasePage:
             except Exception as e:
                 raise Exception(f'Не удалось подтвердить алерт: {e}')
 
+    def assertion_text_func(self, locator, expected) -> None:
+        with allure.step('Проверка текста на странице'):
+            try:
+                actual = self.find_element(locator).text
+            except Exception as e:
+                raise Exception(f'Не удалось найти текст на странице по локатору {locator}: {e}')
+        assert expected == actual, f"Text '{actual}' is not correct."
+
     @staticmethod
-    def get_text(element: object) -> str:
+    def get_text(element: WebElement) -> str:
         try:
             return element.text
         except Exception as e:
