@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.remote.webelement import WebElement
 
-from data.locators.popup_modules_locators import PopupModulesLocators as loc
+from data.locators.buttons_modules_locators import PopupModulesLocators as loc
 from data.urls import Urls
 from pages.base_page import BasePage
 from pages.main_page import MainPage
