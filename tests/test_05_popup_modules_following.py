@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from data.locators.popup_modules_locators import PopupModulesLocators as loc
+from data.locators.buttons_modules_locators import PopupModulesLocators as loc
 from pages.modules_page import ModulesPage as mp
 from data.urls import Urls
 
@@ -31,22 +31,22 @@ def test_popup_module_following(pages, module_locator, url, title, header_text):
     page.open_main()
     page.click_modules_button()
 
-    with allure.step(f'1. проверить отображение кнопки модуля "{header_text}" в области попапа'):
+    with allure.step(f'1. Проверить отображение кнопки модуля "{header_text}" в области попапа'):
         assert page.module_button_is_displayed(module_locator, header_text), \
             f'Кнопка модуля "{header_text}" не найдена'
 
-    with allure.step(f'2. перейти на страницу модуля "{header_text}"'):
+    with allure.step(f'2. Перейти на страницу модуля "{header_text}"'):
         page.click_module_button(module_locator)
 
-    with allure.step(f'3. проверить url страницы модуля "{header_text}"'):
+    with allure.step(f'3. Проверить url страницы модуля "{header_text}"'):
         assert page.check_current_url(url), \
             f'Url страницы модуля "{header_text}" не совпадает с ожидаемым: {url}'
 
-    with allure.step(f'4. проверить title страницы модуля "{header_text}"'):
+    with allure.step(f'4. Проверить title страницы модуля "{header_text}"'):
         assert page.check_page_title(title), \
             f'Title страницы модуля "{header_text}" не совпадает с ожидаемым: {title}'
 
-    with allure.step(f'5. проверить текст заголовка страницы модуля "{header_text}"'):
+    with allure.step(f'5. Проверить текст заголовка страницы модуля "{header_text}"'):
         assert page.check_header_text(header_text), \
             f'Текст заголовка страницы модуля "{header_text}" не совпадает с ожидаемым: {header_text}'
 

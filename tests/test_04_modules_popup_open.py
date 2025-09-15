@@ -1,6 +1,6 @@
 import allure
 
-from data.locators.popup_modules_locators import PopupModulesLocators as loc
+from data.locators.buttons_modules_locators import PopupModulesLocators as loc
 from data.urls import Urls
 
 urls = Urls()
